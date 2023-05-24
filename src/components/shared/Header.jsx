@@ -24,6 +24,7 @@ const Header = () => {
                         className="input input-bordered"
                     />
                 </div>
+                <input type="checkbox" className="toggle toggle-info" checked />
                 <div className="dropdown dropdown-end">
                     <label
                         tabIndex={0}
