@@ -19,7 +19,7 @@ const Header = () => {
     }
 
     return (
-        <div className=" bg-[#B1B2FF]">
+        <div className="sticky bg-[#B1B2FF]">
             <div className="navbar lg:container mx-auto">
                 <div className="">
                     <div className="dropdown">
@@ -44,27 +44,27 @@ const Header = () => {
                             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                         >
                             <li>
-                                <a>Home</a>
+                                <Link to="/">Home</Link>
                             </li>
                             <li>
-                                <a>Blog</a>
+                                <Link to="/blog">Blog</Link>
                             </li>
                             <li>
                                 <a>About Us</a>
                             </li>
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">
+                    <Link to="/" className="btn btn-ghost normal-case text-xl">
                         LunchBox
-                    </a>
+                    </Link>
                 </div>
                 <div className="navbar-start hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li>
-                            <a>Home</a>
+                            <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <a>Blog</a>
+                            <Link to="/blog">Blog</Link>
                         </li>
                         <li>
                             <a>About Us</a>
@@ -130,14 +130,11 @@ const Header = () => {
                         <>
                             <Link
                                 to="/register"
-                                className="btn btn-outline btn-info"
+                                className="btn btn-outline mx-2"
                             >
                                 Register
                             </Link>
-                            <Link
-                                to="/login"
-                                className="btn btn-outline btn-success"
-                            >
+                            <Link to="/login" className="btn btn-outline">
                                 Login
                             </Link>
                         </>

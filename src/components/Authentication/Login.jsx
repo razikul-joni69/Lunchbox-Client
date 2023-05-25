@@ -1,17 +1,22 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const { continueWithGoogle } = useContext(AuthContext);
 
+    const from = location.state?.from?.pathname || "/";
+
     const handleGoogleLogin = () => {
-        continueWithGoogle()
-    }
+        continueWithGoogle();
+        navigate(from);
+    };
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
-            <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+            <div className="md:pt-0  p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
                 <h1 className="font-bold text-center text-2xl mb-5">
                     Please Login
                 </h1>

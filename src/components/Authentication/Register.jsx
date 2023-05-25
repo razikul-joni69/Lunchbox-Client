@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 const Register = () => {
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
-            <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+            <div className="p-10 md:pt-0 xs:p-0 mx-auto md:w-full md:max-w-md">
                 <h1 className="font-bold text-center text-2xl mb-5">
                     Please Register
                 </h1>

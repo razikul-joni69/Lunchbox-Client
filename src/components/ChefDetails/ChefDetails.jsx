@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import Loading from "../shared/Loading";
 
-const ChefsRecipes = () => {
+const ChefDetails = () => {
     const [chef, setChef] = useState({});
     const { id } = useParams();
     const chefs = useLoaderData();
@@ -11,9 +12,10 @@ const ChefsRecipes = () => {
         setChef(searchedChef);
     }, [chefs, id]);
 
-    if (!chef.recipes) {
-        return <div>Loading..........</div>;
+    if (!chef) {
+        return <Loading />;
     }
+
     return (
         <div className="">
             <div className="">
@@ -51,4 +53,4 @@ const ChefsRecipes = () => {
     );
 };
 
-export default ChefsRecipes;
+export default ChefDetails;

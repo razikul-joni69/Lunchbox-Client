@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useState } from "react";
@@ -35,7 +36,7 @@ const ChefsSection = () => {
                         </div>
                     </div>
                     <hr />
-                    <div className="text-white flex justify-between my-7">
+                    <div className="flex justify-between my-7">
                         <div className="text-center text-base">
                             <p className="mb-2 text-xl">
                                 {chef.experience} Year's

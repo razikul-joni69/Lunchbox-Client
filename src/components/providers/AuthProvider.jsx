@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
     GoogleAuthProvider,
     getAuth,
@@ -17,14 +18,15 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const googleProvider = new GoogleAuthProvider();
+
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) => {
             setUser(user);
             setLoading(false);
         });
 
-        return unsubscribe();
-    }, []);
+        // return unsubscribe();
+    }, [user]);
 
     const continueWithGoogle = () => {
         signInWithPopup(auth, googleProvider)
@@ -38,13 +40,13 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         signOut(auth)
-            .then(res => {
-                console.log("signOut Sucessfull", res)
+            .then((res) => {
+                console.log("signOut Sucessfull", res);
             })
-            .catch(err => {
-                console.log(err.message)
-            })
-    }
+            .catch((err) => {
+                console.log(err.message);
+            });
+    };
 
     const authInfo = {
         user,

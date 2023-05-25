@@ -16,7 +16,7 @@ const HeroSection = () => {
             <div id="slide1" className="carousel-item relative w-full">
                 <img
                     src="https://images.unsplash.com/photo-1496412705862-e0088f16f791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-                    className="w-full h-[600px] blur-sm "
+                    className="w-full h-[600px] blur-sm bg-center bg-no-repeat bg-cover"
                 />
                 <div className="hero min-h-screen  absolute  transform -translate-y-1/2  top-1/2">
                     <div className="hero-content flex-col lg:flex-row-reverse md:gap-x-20">
