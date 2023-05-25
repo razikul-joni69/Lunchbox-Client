@@ -8,7 +8,7 @@ const ChefsSection = () => {
     const [chefs, setChefs] = useState([]);
 
     useState(() => {
-        fetch("/chefs.json")
+        fetch("http://localhost:5000/api/v1/chefs")
             .then((res) => res.json())
             .then((data) => setChefs(data));
     }, []);
@@ -63,7 +63,7 @@ const ChefsSection = () => {
                     <hr />
                     <div className="flex mt-4 space-x-3 md:mt-6">
                         <Link
-                            to={`chefs/${chef.id}`}
+                            to={`chefs/${chef.name}`}
                             className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
                             View Recipies

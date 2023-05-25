@@ -89,7 +89,7 @@ const Header = () => {
                     />
 
                     {user ? (
-                        <div className="dropdown dropdown-end">
+                        <div className={`dropdown  dropdown-end `}>
                             <label
                                 tabIndex={0}
                                 className="btn btn-ghost btn-circle avatar"
