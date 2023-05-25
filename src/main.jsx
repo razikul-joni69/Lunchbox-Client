@@ -5,6 +5,8 @@ import ChefsRecipes from "./components/ChefsRecipes/ChefsRecipes.jsx";
 import Home from "./components/Home/Home.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 import "./index.css";
+import Login from "./components/Authentication/Login.jsx";
+import Register from "./components/Authentication/Register.jsx";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
                     return chefs;
                 },
             },
+            {
+                path: "login",
+                element: <Login/>
+            },
+            {
+                path: "register",
+                element: <Register/>
+            }
         ],
     },
 ]);
