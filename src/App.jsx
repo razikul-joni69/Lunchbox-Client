@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import ChefsSection from "./components/ChefsSection/ChefsSection";
 import HeroSection from "./components/HeroSection/HeroSection";
 import Footer from "./components/shared/Footer";
@@ -7,8 +8,7 @@ function App() {
     return (
         <>
             <Header />
-            <HeroSection/>
-            <ChefsSection/>
+            <Outlet/>
             <Footer/>
         </>
     );

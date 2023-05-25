@@ -69,7 +69,7 @@ const Header = () => {
                         </div>
                     </div>
                     <input
-                        onClick={handleDarkMode}
+                        onChange={handleDarkMode}
                         type="checkbox"
                         className="toggle toggle-info"
                         checked={darkMode}

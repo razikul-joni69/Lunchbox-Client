@@ -1,7 +1,7 @@
 import { Rating } from "@smastrom/react-rating";
-import React, { useState } from "react";
-
 import "@smastrom/react-rating/style.css";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ChefsSection = () => {
     const [chefs, setChefs] = useState([]);
@@ -11,6 +11,7 @@ const ChefsSection = () => {
             .then((res) => res.json())
             .then((data) => setChefs(data));
     }, []);
+
     return (
         <div className="grid grid-cols-3 gap-y-5 justify-items-center container mx-auto my-12">
             {chefs.map((chef) => (
@@ -60,12 +61,12 @@ const ChefsSection = () => {
                     </div>
                     <hr />
                     <div className="flex mt-4 space-x-3 md:mt-6">
-                        <a
-                            href="#"
+                        <Link
+                            to={`chefs/${chef.id}`}
                             className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
                             View Recipies
-                        </a>
+                        </Link>
                     </div>
                 </div>
             ))}
