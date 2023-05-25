@@ -46,7 +46,7 @@ const ChefsSection = () => {
                             <p className="mb-2 text-xl">{chef.likes} K</p> Likes
                         </div>
                         <div className="text-center text-base">
-                            <p className="mb-2 text-xl">
+                            <div className="mb-2 text-xl">
                                 <div>
                                     <Rating
                                         style={{ maxWidth: 100 }}
@@ -55,7 +55,7 @@ const ChefsSection = () => {
                                         value={chef.rating}
                                     />
                                 </div>
-                            </p>{" "}
+                            </div>{" "}
                             Rating
                         </div>
                     </div>

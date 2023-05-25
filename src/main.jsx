@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./components/Authentication/Login.jsx";
+import Register from "./components/Authentication/Register.jsx";
 import ChefsRecipes from "./components/ChefsRecipes/ChefsRecipes.jsx";
 import Home from "./components/Home/Home.jsx";
 import Layout from "./components/Layout/Layout.jsx";
+import AuthProvider from "./components/providers/AuthProvider.jsx";
 import "./index.css";
-import Login from "./components/Authentication/Login.jsx";
-import Register from "./components/Authentication/Register.jsx";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
                 path: "/chefs/:id",
                 element: <ChefsRecipes />,
                 // ! Not finding expected data
-                loader: async ({ params }) => {
+                loader: async () => {
                     const chefs = await fetch(`/chefs.json`);
                     // const searchedChef = await chefs.find(
                     //     (chef) => chef.id === params.id
@@ -31,18 +32,20 @@ const router = createBrowserRouter([
             },
             {
                 path: "login",
-                element: <Login/>
+                element: <Login />,
             },
             {
                 path: "register",
-                element: <Register/>
-            }
+                element: <Register />,
+            },
         ],
     },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <AuthProvider>
+            <RouterProvider router={router} />
+        </AuthProvider>
     </React.StrictMode>
 );

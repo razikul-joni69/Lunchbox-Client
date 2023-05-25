@@ -1,11 +1,31 @@
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import {
+    GoogleAuthProvider,
+    getAuth,
+    onAuthStateChanged,
+    signInWithPopup,
+    signOut,
+} from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 import app from "../configs/firebase.config";
+
+export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
 
-const googleProvider = new GoogleAuthProvider();
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-const AuthProvider = () => {
+    const googleProvider = new GoogleAuthProvider();
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user);
+            setLoading(false);
+        });
+
+        return unsubscribe();
+    }, []);
+
     const continueWithGoogle = () => {
         signInWithPopup(auth, googleProvider)
             .then((res) => {
@@ -16,10 +36,25 @@ const AuthProvider = () => {
             });
     };
 
+    const logOut = () => {
+        signOut(auth)
+            .then(res => {
+                console.log("signOut Sucessfull", res)
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
+    }
+
+    const authInfo = {
+        user,
+        loading,
+        continueWithGoogle,
+        logOut,
+    };
+
     return (
-        <div>
-            <button onClick={continueWithGoogle}>sign in</button>
-        </div>
+        <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
     );
 };
 

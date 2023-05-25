@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import Loading from "./Loading";
 const Header = () => {
+    const { user, loading, logOut } = useContext(AuthContext);
     const [darkMode, setDarkMode] = useState(false);
 
     const handleDarkMode = () => {
         setDarkMode(!darkMode);
     };
+
+    const handleLogout = () => {
+        logOut();
+    };
+
+    if (loading) {
+        return <Loading />;
+    }
+
     return (
         <div className=" bg-[#B1B2FF]">
             <div className="navbar lg:container mx-auto">
@@ -74,33 +87,61 @@ const Header = () => {
                         className="toggle toggle-info"
                         checked={darkMode}
                     />
-                    <div className="dropdown dropdown-end">
-                        <label
-                            tabIndex={0}
-                            className="btn btn-ghost btn-circle avatar"
-                        >
-                            <div className="w-10 rounded-full ring-2 ring-pink-600">
-                                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                            </div>
-                        </label>
-                        <ul
-                            tabIndex={0}
-                            className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-                        >
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a>Settings</a>
-                            </li>
-                            <li>
-                                <a>Logout</a>
-                            </li>
-                        </ul>
-                    </div>
+
+                    {user ? (
+                        <div className="dropdown dropdown-end">
+                            <label
+                                tabIndex={0}
+                                className="btn btn-ghost btn-circle avatar"
+                            >
+                                <div className="w-10 rounded-full ring-2 ring-pink-600">
+                                    {user?.photoURL ? (
+                                        <img
+                                            title={`Hello ${user?.displayName} Click For More`}
+                                            src={`${user?.photoURL}`}
+                                            alt="User"
+                                        />
+                                    ) : (
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    )}
+                                </div>
+                            </label>
+                            <ul
+                                tabIndex={0}
+                                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                            >
+                                <li>
+                                    <a>{user?.displayName}</a>
+                                </li>
+                                <li>
+                                    <a>Settings</a>
+                                </li>
+                                <li>
+                                    <a
+                                        onClick={handleLogout}
+                                        className="bg-yellow-200"
+                                    >
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <>
+                            <Link
+                                to="/register"
+                                className="btn btn-outline btn-info"
+                            >
+                                Register
+                            </Link>
+                            <Link
+                                to="/login"
+                                className="btn btn-outline btn-success"
+                            >
+                                Login
+                            </Link>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

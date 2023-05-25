@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
-import Recipes from "../Recipes/Recipes";
-import ChefsSection from "../ChefsSection/ChefsSection";
 
 const ChefsRecipes = () => {
     const [chef, setChef] = useState({});
@@ -47,7 +45,6 @@ const ChefsRecipes = () => {
                     <p>Experience: {chef.experience} Years</p>
                     <p>Likes: {chef.likes}k Likes on Instagram</p>
                     <p>Rating: {chef.rating}</p>
-               
                 </div>
             </div>
         </div>
