@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { showErrorMessage } from "../../utils/Notification";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
@@ -15,6 +16,7 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         if (password.length < 6) {
+            showErrorMessage("Password must be at least 6 characters");
             return setError("Password must be at least 6 characters");
         } else {
             emailPasswordUserLogin(email, password);

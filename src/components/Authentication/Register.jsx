@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import { showErrorMessage } from "../../utils/Notification";
 const Register = () => {
     const { emailPasswordUserCreate, error, setError } =
         useContext(AuthContext);
@@ -12,8 +13,10 @@ const Register = () => {
         const confirmPassword = e.target.confirm.value;
 
         if (password !== confirmPassword) {
+            showErrorMessage("Password doesn't match confirm password!");
             return setError("Password doesn't match confirm password");
         } else if (password.length < 6) {
+            showErrorMessage("Password must be at least 6 characters");
             return setError("Password must be at least 6 characters");
         } else {
             emailPasswordUserCreate(email, password);

@@ -89,7 +89,7 @@ const Header = () => {
                     />
 
                     {user ? (
-                        <div className={`dropdown  dropdown-end `}>
+                        <div className={`dropdown  dropdown-end`}>
                             <label
                                 tabIndex={0}
                                 className="btn btn-ghost btn-circle avatar"
@@ -97,12 +97,23 @@ const Header = () => {
                                 <div className="w-10 rounded-full ring-2 ring-pink-600">
                                     {user?.photoURL ? (
                                         <img
-                                            title={`Hello ${user?.displayName} Click For More`}
+                                            title={
+                                                user.displayName
+                                                    ? `Hello ${user?.displayName} Click For More`
+                                                    : "Hello Mr. X Click For More"
+                                            }
                                             src={`${user?.photoURL}`}
                                             alt="User"
                                         />
                                     ) : (
-                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                        <img
+                                            title={
+                                                user.displayName
+                                                    ? `Hello ${user?.displayName} Click For More`
+                                                    : "Hello Mr. X Click For More"
+                                            }
+                                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                                        />
                                     )}
                                 </div>
                             </label>
@@ -111,10 +122,11 @@ const Header = () => {
                                 className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                             >
                                 <li>
-                                    <a>{user?.displayName}</a>
-                                </li>
-                                <li>
-                                    <a>Settings</a>
+                                    {user?.displayName ? (
+                                        <a>{user?.displayName}</a>
+                                    ) : (
+                                        <a>Name: Unknown</a>
+                                    )}
                                 </li>
                                 <li>
                                     <a

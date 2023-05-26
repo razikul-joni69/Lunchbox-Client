@@ -9,6 +9,8 @@ import {
     signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { showErrorMessage, showSuccessMessage } from "../../utils/Notification";
 import app from "../configs/firebase.config";
 
 export const AuthContext = createContext(null);
@@ -36,10 +38,11 @@ const AuthProvider = ({ children }) => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
                 setError("");
+                showSuccessMessage("🦸 User Created Successfully!");
             })
             .catch((err) => {
-                console.log(err.message);
                 setError(err.message);
+                showErrorMessage(err.message);
             });
     };
 
@@ -48,9 +51,11 @@ const AuthProvider = ({ children }) => {
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
                 setError("");
+                showSuccessMessage("👍 Email SignIn Successfull!");
             })
             .catch((err) => {
                 setError(err.message);
+                showErrorMessage(err.message);
             });
     };
 
@@ -58,10 +63,12 @@ const AuthProvider = ({ children }) => {
         signInWithPopup(auth, googleProvider)
             .then(() => {
                 setError("");
+                showSuccessMessage("👍 Google SignIn Successfull!");
             })
             .catch((err) => {
                 console.log(err.message);
                 setError(err.message);
+                showErrorMessage(err.message);
             });
     };
 
@@ -69,9 +76,10 @@ const AuthProvider = ({ children }) => {
         signOut(auth)
             .then(() => {
                 console.log("signOut Sucessfull");
+                showSuccessMessage("👍 SignOut Succesfully!");
             })
             .catch((err) => {
-                console.log(err.message);
+                showErrorMessage(err.message);
             });
     };
 
@@ -87,7 +95,21 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={authInfo}>
+            {children}{" "}
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
+        </AuthContext.Provider>
     );
 };
 
