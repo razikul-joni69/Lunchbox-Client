@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const Recipes = () => {
     const [popular, setPopular] = useState([]);
     const [bestseller, setBestseller] = useState([]);
+    const [newRecipes, setNewRecipes] = useState([]);
 
     useEffect(() => {
         fetch("http://localhost:5000/api/v1/recipes/popular")
@@ -13,17 +14,21 @@ const Recipes = () => {
         fetch("http://localhost:5000/api/v1/recipes/bestseller")
             .then((res) => res.json())
             .then((data) => setBestseller(data));
+
+        fetch("http://localhost:5000/api/v1/recipes/new")
+            .then((res) => res.json())
+            .then((data) => setNewRecipes(data));
     }, []);
 
     return (
-        <div className="container mx-auto my-20 flex">
-            <div className=" w-1/4 mt-24 mr-5">
-                <div className=" ">
-                    <h2 className="mb-5 py-5 badge badge-success font-serif  uppercase text-xl">
+        <div className="container mx-auto my-20 md:flex">
+            <div className="w-full md:w-2/5 lg:w-1/4  mt-24 mr-5 m-6 md:m-0">
+                <div className="mt-20">
+                    <h2 className="mb-5 md:py-5 badge badge-success font-serif  uppercase text-xl">
                         BestSeller Recipes
                     </h2>
                     <div>
-                        {bestseller?.map((recipe) => {
+                        {bestseller?.slice(0, 10).map((recipe) => {
                             return (
                                 <div key={recipe.id}>
                                     <p className="text-[18px] ">
@@ -35,11 +40,11 @@ const Recipes = () => {
                     </div>
                 </div>
                 <div className="mt-8 ">
-                    <h2 className="mb-5 py-5 badge badge-info font-serif  uppercase text-xl ">
-                        BestSeller Recipes
+                    <h2 className="mb-5 py-5 badge badge-info font-serif uppercase text-xl ">
+                        New Recipes
                     </h2>
                     <div>
-                        {bestseller?.map((recipe) => {
+                        {newRecipes?.slice(0, 10).map((recipe) => {
                             return (
                                 <div key={recipe.id}>
                                     <p className="text-[18px]">
@@ -51,11 +56,11 @@ const Recipes = () => {
                     </div>
                 </div>
             </div>
-            <div className=" w-4/5">
-                <h2 className="mb-10 text-center font-serif  uppercase text-4xl xl:text-5xl">
+            <div className="w-full md:w-3/5 lg:w-4/5">
+                <h2 className="mb-10 text-center font-serif mt-10 sm:mt-0  uppercase text-4xl xl:text-5xl">
                     Popular Recipes
                 </h2>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {popular?.slice(0, 8).map((recipe) => {
                         return (
                             <div

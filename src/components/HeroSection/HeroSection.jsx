@@ -4,7 +4,7 @@ import "./HeroSection.css";
 
 const HeroSection = () => {
     return (
-        <div className=" bg-slate-600 bg-blend-soft-light bg-[url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)] bg-cover bg-no-repeat bg-center  w-full h-[600px] ">
+        <div className=" bg-slate-600 bg-blend-soft-light bg-[url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)] bg-cover bg-no-repeat bg-center  w-full lg:h-[600px] h-[900px] ">
             <div className=" py-20 container mx-auto">
                 <div className="hero-content flex-col lg:flex-row-reverse md:gap-x-20">
                     <div className="swiper__container">
@@ -17,7 +17,7 @@ const HeroSection = () => {
                                 disableOnInteraction: false,
                             }}
                             modules={[EffectCards, Autoplay]}
-                            className="mySwiper"
+                            className="mySwiper mr-0 lg:mr-20"
                         >
                             <SwiperSlide>
                                 <img

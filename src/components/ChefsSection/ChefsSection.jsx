@@ -18,7 +18,7 @@ const ChefsSection = () => {
             <h2 className="text-center mt-12 font-serif  uppercase text-4xl xl:text-5xl">
                 Chefs Section
             </h2>
-            <div className="grid grid-cols-3 gap-y-5 justify-items-center container mx-auto my-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-5 justify-items-center container mx-auto my-12">
                 {chefs.map((chef) => (
                     <div
                         key={chef.id}
