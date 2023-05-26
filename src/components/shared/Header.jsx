@@ -15,7 +15,7 @@ const Header = () => {
     };
 
     if (loading) {
-        return <Loading />;
+        return <Loading/>;
     }
 
     return (

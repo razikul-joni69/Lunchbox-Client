@@ -105,7 +105,7 @@ const ChefDetails = () => {
                 About Recipes
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 container mx-auto">
-                {recipes.map((recipe) => {
+                {recipes?.map((recipe) => {
                     return (
                         <div key={recipe.id} className="p-10">
                             <div className=" rounded overflow-hidden shadow-lg">
