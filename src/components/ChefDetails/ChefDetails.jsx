@@ -24,36 +24,21 @@ const ChefDetails = () => {
         setIsShowMore(!isShowMore);
     };
 
-
     //! fix set favorite
     const handleFavourite = (id) => {
-        if(fav) {
-            const selected = fav.find(s => {
-                if(s.id === id){
-                    setFav(s.favorite = true);
-                }
-            });
-            console.log(selected)
-        }
-        
-        const newFav = [
-            ...fav,
-            {
-                id,
-                favorite: false,
-            },
-        ];
-        console.log(newFav);
-         setFav(newFav);
-        // if(fav) {
-        //     const selected = fav.find((s) => s.id === id);
-        //     console.log(selected);
-        // } else {
-        //     const newFav = [...fav, { id: true }];
-        //     setFav(newFav);
-        // }
+        const except = fav.filter((s) => s.id !== id);
 
-        // setFav(!fav);
+        const selected = fav.find((s) => s.id === id);
+        console.log(selected, except);
+        if (!selected) {
+            setFav([
+                ...except,
+                {
+                    id,
+                    favorite: true,
+                },
+            ]);
+        }
     };
 
     if (!chef) {
@@ -68,7 +53,6 @@ const ChefDetails = () => {
                     src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
                     alt=""
                 />
-                {/*  */}
                 <div className="pt-6 pb-12 ">
                     <div id="card" className="">
                         <h2 className="text-center font-serif  uppercase text-4xl xl:text-5xl">
@@ -100,12 +84,7 @@ const ChefDetails = () => {
                                         </p>
                                     </div>
                                     <div className="badge text-xl gap-2 p-3">
-                                        <p>
-                                            <p>
-                                                {" "}
-                                                {chef.likes}k Likes on Instagram
-                                            </p>
-                                        </p>
+                                        <p> {chef.likes}k Likes on Instagram</p>
                                     </div>
                                     <div className="badge text-xl gap-2 p-3 my-2">
                                         <Rating

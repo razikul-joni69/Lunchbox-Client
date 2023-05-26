@@ -1,5 +1,26 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 const Register = () => {
+    const { emailPasswordUserCreate, error, setError } =
+        useContext(AuthContext);
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const confirmPassword = e.target.confirm.value;
+
+        if (password !== confirmPassword) {
+            return setError("Password doesn't match confirm password");
+        } else if (password.length < 6) {
+            return setError("Password must be at least 6 characters");
+        } else {
+            emailPasswordUserCreate(email, password);
+            e.target.reset();
+        }
+    };
+
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
             <div className="p-10 md:pt-0 xs:p-0 mx-auto md:w-full md:max-w-md">
@@ -7,7 +28,7 @@ const Register = () => {
                     Please Register
                 </h1>
                 <div className="bg-white shadow w-full rounded-lg divide-gray-200">
-                    <div className="px-5 pt-7">
+                    <form onSubmit={handleRegister} className="px-5 pt-7">
                         <label className="font-semibold text-sm text-gray-600 pb-1 block">
                             E-mail
                         </label>
@@ -38,8 +59,13 @@ const Register = () => {
                             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                             required
                         />
+                        {error && (
+                            <p className=" mb-5 text-sm  text-red-700">
+                                {error}
+                            </p>
+                        )}
                         <button
-                            type="button"
+                            type="submit"
                             className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
                         >
                             <span className="inline-block mr-2">Register</span>
@@ -58,7 +84,7 @@ const Register = () => {
                                 />
                             </svg>
                         </button>
-                    </div>
+                    </form>
                     <div className="m-0 p-0 ">
                         <p className="mt-6 text-sm text-center text-gray-400">
                             Already have an account yet?{" "}
