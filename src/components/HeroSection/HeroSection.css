@@ -53,6 +53,13 @@ body {
     padding: 20px;
 }
 
+/* .hero__content{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
 .swiper-slide:nth-child(1n) {
     background-color: rgb(206, 17, 17);
 }
