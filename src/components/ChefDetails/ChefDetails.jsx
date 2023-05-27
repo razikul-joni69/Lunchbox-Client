@@ -12,7 +12,7 @@ const ChefDetails = () => {
     const { name } = useParams();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/v1/chef/${name}`)
+        fetch(`https://lunchbox-server.vercel.app/api/v1/chef/${name}`)
             .then((res) => res.json())
             .then((data) => {
                 setChef(data);

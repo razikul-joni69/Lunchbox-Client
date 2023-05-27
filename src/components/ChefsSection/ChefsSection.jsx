@@ -8,7 +8,7 @@ const ChefsSection = () => {
     const [chefs, setChefs] = useState([]);
 
     useState(() => {
-        fetch("http://localhost:5000/api/v1/chefs")
+        fetch("https://lunchbox-server.vercel.app/api/v1/chefs")
             .then((res) => res.json())
             .then((data) => setChefs(data));
     }, []);

@@ -7,15 +7,15 @@ const Recipes = () => {
     const [newRecipes, setNewRecipes] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/v1/recipes/popular")
+        fetch("https://lunchbox-server.vercel.app/api/v1/recipes/popular")
             .then((res) => res.json())
             .then((data) => setPopular(data));
 
-        fetch("http://localhost:5000/api/v1/recipes/bestseller")
+        fetch("https://lunchbox-server.vercel.app/api/v1/recipes/bestseller")
             .then((res) => res.json())
             .then((data) => setBestseller(data));
 
-        fetch("http://localhost:5000/api/v1/recipes/new")
+        fetch("https://lunchbox-server.vercel.app/api/v1/recipes/new")
             .then((res) => res.json())
             .then((data) => setNewRecipes(data));
     }, []);
