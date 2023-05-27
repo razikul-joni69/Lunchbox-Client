@@ -1,5 +1,6 @@
 import { Rating } from "@smastrom/react-rating";
 import { useEffect, useState } from "react";
+import LazyLoad from "react-lazy-load";
 
 const Recipes = () => {
     const [popular, setPopular] = useState([]);
@@ -67,11 +68,13 @@ const Recipes = () => {
                                 key={recipe.id}
                                 className="p-3 rounded-xl flex items-center shadow-lg shadow-zinc-300 "
                             >
-                                <img
-                                    className="h-36 w-36 rounded-full bg-white mr-5"
-                                    src={recipe.img}
-                                    alt=""
-                                />
+                                <LazyLoad className="w-full">
+                                    <img
+                                        className="h-36 w-36 rounded-full bg-white mr-5"
+                                        src={recipe.img}
+                                        alt=""
+                                    />
+                                </LazyLoad>
                                 <div>
                                     <h3 className="text-[20px]">
                                         {recipe.recipe_name}

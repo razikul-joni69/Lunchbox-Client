@@ -2,6 +2,7 @@
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useState } from "react";
+import LazyLoad from "react-lazy-load";
 import { Link } from "react-router-dom";
 
 const ChefsSection = () => {
@@ -25,11 +26,13 @@ const ChefsSection = () => {
                         className="w-full p-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                     >
                         <div className="flex items-center">
-                            <img
-                                className="w-16 h-16 mb-3 rounded-full shadow-lg mr-5"
-                                src={chef.image}
-                                alt="Bonnie image"
-                            />
+                            <LazyLoad>
+                                <img
+                                    className="w-16 h-16 mb-3 rounded-full shadow-lg mr-5"
+                                    src={chef.image}
+                                    alt="Bonnie image"
+                                />
+                            </LazyLoad>
                             <div>
                                 <h5 className=" text-xl font-medium text-gray-900 dark:text-white">
                                     {chef.name}

@@ -1,7 +1,9 @@
 import { Rating } from "@smastrom/react-rating";
 import { useEffect, useState } from "react";
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
+import LazyLoad from "react-lazy-load";
 import { useParams } from "react-router-dom";
+import { showSuccessMessage } from "../../utils/Notification";
 import Loading from "../shared/Loading";
 
 const ChefDetails = () => {
@@ -27,6 +29,7 @@ const ChefDetails = () => {
     //! fix set favorite
     const handleFavourite = (id) => {
         setFav(!fav);
+        showSuccessMessage("🧾 Recipe is added to your favorites list!");
         // const except = fav.filter((s) => s.id !== id);
 
         // const selected = fav.find((s) => s.id === id);
@@ -49,12 +52,14 @@ const ChefDetails = () => {
     return (
         <div className="">
             <div className="">
-                <div className="bg-slate-600 bg-blend-soft-light bg-cover bg-no-repeat bg-center  w-full h-80 bg-[url(https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)]">
-                    <img className=" " src="" alt="" />
-                    <h2 className="flex justify-center items-center h-full text-4xl md:text-5xl text-center text-white">
-                        Welcome to {name}'s kitchen
-                    </h2>
-                </div>
+                <LazyLoad>
+                    <div className="bg-slate-600 bg-blend-soft-light bg-cover bg-no-repeat bg-center  w-full h-80 bg-[url(https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)]">
+                        <img className=" " src="" alt="" />
+                        <h2 className="flex justify-center items-center h-full text-4xl md:text-5xl text-center text-white">
+                            Welcome to {name}'s kitchen
+                        </h2>
+                    </div>
+                </LazyLoad>
                 <div className="pt-6 pb-12 ">
                     <div id="card" className="">
                         <h2 className="text-center font-serif  uppercase text-4xl xl:text-5xl">
@@ -67,10 +72,12 @@ const ChefDetails = () => {
                                         bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2 text-base"
                             >
                                 <div className="h-64 w-auto md:w-1/2">
-                                    <img
-                                        className="inset-0 h-full w-full object-cover object-center"
-                                        src={chef.image}
-                                    />
+                                    <LazyLoad>
+                                        <img
+                                            className="inset-0 h-full w-full object-cover object-center"
+                                            src={chef.image}
+                                        />
+                                    </LazyLoad>
                                 </div>
                                 <div className="w-full p-5 text-gray-800 flex flex-col justify-between">
                                     <h3 className="font-semibold text-xl leading-tight truncate">
@@ -111,11 +118,13 @@ const ChefDetails = () => {
                     return (
                         <div key={recipe.id} className="p-10">
                             <div className=" rounded overflow-hidden shadow-lg">
-                                <img
-                                    className="w-full"
-                                    src={recipe.img}
-                                    alt="Mountain"
-                                />
+                                <LazyLoad>
+                                    <img
+                                        className="w-full"
+                                        src={recipe.img}
+                                        alt="Mountain"
+                                    />
+                                </LazyLoad>
                                 <div className="px-6 py-4">
                                     <div className="font-bold text-xl mb-2">
                                         {recipe.recipe_name}

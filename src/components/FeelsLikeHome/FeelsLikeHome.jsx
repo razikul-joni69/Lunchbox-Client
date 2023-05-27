@@ -1,3 +1,5 @@
+import LazyLoad from "react-lazy-load";
+
 const FeelsLikeHome = () => {
     return (
         <div className="">
@@ -30,16 +32,18 @@ const FeelsLikeHome = () => {
                     <p className="text-xl mt-6">Stay With Us</p>
                 </div>
                 <div>
-                    <img
-                        src="https://static.wixstatic.com/media/c837a6_5d9b5804b420484aa112d37fa3ce3f45~mv2.jpg/v1/fill/w_677,h_590,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_5d9b5804b420484aa112d37fa3ce3f45~mv2.jpg"
-                        alt=""
-                        style={{
-                            width: "677px",
-                            height: "590px",
-                            objectFit: "cover",
-                            objectPosition: "50% 50%",
-                        }}
-                    />
+                    <LazyLoad>
+                        <img
+                            src="https://static.wixstatic.com/media/c837a6_5d9b5804b420484aa112d37fa3ce3f45~mv2.jpg/v1/fill/w_677,h_590,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_5d9b5804b420484aa112d37fa3ce3f45~mv2.jpg"
+                            alt=""
+                            style={{
+                                width: "677px",
+                                height: "590px",
+                                objectFit: "cover",
+                                objectPosition: "50% 50%",
+                            }}
+                        />
+                    </LazyLoad>
                 </div>
             </div>
             {/* <section
