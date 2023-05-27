@@ -51,7 +51,7 @@ const ChefDetails = () => {
             <div className="">
                 <div className="bg-slate-600 bg-blend-soft-light bg-cover bg-no-repeat bg-center  w-full h-80 bg-[url(https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)]">
                     <img className=" " src="" alt="" />
-                    <h2 className="flex justify-center items-center h-full text-5xl text-white">
+                    <h2 className="flex justify-center items-center h-full text-4xl md:text-5xl text-center text-white">
                         Welcome to {name}'s kitchen
                     </h2>
                 </div>

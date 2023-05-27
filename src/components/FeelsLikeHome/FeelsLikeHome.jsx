@@ -1,7 +1,10 @@
 const FeelsLikeHome = () => {
     return (
-        <div className="bg-[#333e30]">
-            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center">
+        <div className="">
+            <h2 className="text-center font-serif  uppercase text-4xl xl:text-5xl mb-5">
+                Feel Our Food
+            </h2>
+            <div className="container mx-auto bg-[#333e30] grid grid-cols-1 md:grid-cols-2 items-center">
                 <div className="text-white p-8">
                     <h2 className="text-xl mb-5">
                         <span className="text-2xl md:text-[70px]">Enjoy</span>{" "}
