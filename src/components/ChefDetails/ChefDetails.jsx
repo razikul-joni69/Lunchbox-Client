@@ -7,7 +7,7 @@ import Loading from "../shared/Loading";
 const ChefDetails = () => {
     const [chef, setChef] = useState();
     const [recipes, setRecipes] = useState([]);
-    const [fav, setFav] = useState([]);
+    const [fav, setFav] = useState(false);
     const [isShowMore, setIsShowMore] = useState(false);
     const { name } = useParams();
 
@@ -26,19 +26,20 @@ const ChefDetails = () => {
 
     //! fix set favorite
     const handleFavourite = (id) => {
-        const except = fav.filter((s) => s.id !== id);
+        setFav(!fav);
+        // const except = fav.filter((s) => s.id !== id);
 
-        const selected = fav.find((s) => s.id === id);
-        console.log(selected, except);
-        if (!selected) {
-            setFav([
-                ...except,
-                {
-                    id,
-                    favorite: true,
-                },
-            ]);
-        }
+        // const selected = fav.find((s) => s.id === id);
+        // console.log(selected, except);
+        // if (!selected) {
+        //     setFav([
+        //         ...except,
+        //         {
+        //             id,
+        //             favorite: true,
+        //         },
+        //     ]);
+        // }
     };
 
     if (!chef) {
@@ -48,11 +49,12 @@ const ChefDetails = () => {
     return (
         <div className="">
             <div className="">
-                <img
-                    className="w-full h-96"
-                    src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-                    alt=""
-                />
+                <div className="bg-slate-600 bg-blend-soft-light bg-cover bg-no-repeat bg-center  w-full h-80 bg-[url(https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)]">
+                    <img className=" " src="" alt="" />
+                    <h2 className="flex justify-center items-center h-full text-5xl text-white">
+                        Welcome to {name}'s kitchen
+                    </h2>
+                </div>
                 <div className="pt-6 pb-12 ">
                     <div id="card" className="">
                         <h2 className="text-center font-serif  uppercase text-4xl xl:text-5xl">
