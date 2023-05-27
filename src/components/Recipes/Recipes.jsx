@@ -24,7 +24,7 @@ const Recipes = () => {
         <div className="container mx-auto my-20 md:flex">
             <div className="w-full md:w-2/5 lg:w-1/4  mt-24 mr-5 m-6 md:m-0">
                 <div className="mt-20">
-                    <h2 className="mb-5 md:py-5 badge badge-success font-serif  uppercase text-xl">
+                    <h2 className="mb-5 py-5 badge badge-success font-serif  uppercase text-xl">
                         BestSeller Recipes
                     </h2>
                     <div>

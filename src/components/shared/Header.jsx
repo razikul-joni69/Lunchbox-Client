@@ -68,13 +68,13 @@ const Header = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <div className="mr-2">
+                <div className="w-full justify-end">
+                    <div className="mr-2 hidden md:block">
                         <span className="ml-[5px]"> Mode</span> <br />
                         <input
                             onChange={handleDarkMode}
                             type="checkbox"
-                            className="toggle toggle-info"
+                            className="toggle toggle-info "
                             checked={darkMode}
                         />
                     </div>

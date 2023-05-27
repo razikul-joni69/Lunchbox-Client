@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import {
+    FacebookAuthProvider,
+    GithubAuthProvider,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     getAuth,
@@ -24,14 +26,18 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
             setLoading(false);
         });
 
-        // return unsubscribe();
+        return () => {
+            unsubscribe();
+        };
     }, [user]);
 
     const emailPasswordUserCreate = async (email, password, name, photoURL) => {
@@ -65,10 +71,17 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     };
 
+    const continueWithGithub = () => {
+        return signInWithPopup(auth, githubProvider);
+    };
+
+    const continueWithFacebook = () => {
+        return signInWithPopup(auth, facebookProvider);
+    };
+
     const logOut = () => {
         signOut(auth)
             .then(() => {
-                console.log("signOut Sucessfull");
                 showSuccessMessage("👍 SignOut Succesfully!");
             })
             .catch((err) => {
@@ -84,6 +97,8 @@ const AuthProvider = ({ children }) => {
         emailPasswordUserCreate,
         emailPasswordUserLogin,
         continueWithGoogle,
+        continueWithGithub,
+        continueWithFacebook,
         logOut,
     };
 

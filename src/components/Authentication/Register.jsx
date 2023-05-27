@@ -1,12 +1,20 @@
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { showErrorMessage } from "../../utils/Notification";
+import { showErrorMessage, showSuccessMessage } from "../../utils/Notification";
 import { AuthContext } from "../providers/AuthProvider";
+import Loading from "../shared/Loading";
 const Register = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { emailPasswordUserCreate, error, setError } =
-        useContext(AuthContext);
+    const {
+        continueWithGoogle,
+        continueWithGithub,
+        continueWithFacebook,
+        emailPasswordUserCreate,
+        error,
+        setError,
+        loading,
+    } = useContext(AuthContext);
     const from = location.state?.from?.pathname || "/";
 
     const handleRegister = (e) => {
@@ -30,6 +38,49 @@ const Register = () => {
             e.target.reset();
         }
     };
+
+    const handleGoogleLogin = () => {
+        continueWithGoogle()
+            .then(() => {
+                setError("");
+                showSuccessMessage("👍 Google Register Successfull!");
+                navigate(from, { replace: true });
+            })
+            .catch((err) => {
+                setError(err.message);
+                showErrorMessage(err.message);
+            });
+    };
+
+    const handleGithubLogin = () => {
+        continueWithGithub()
+            .then(() => {
+                setError("");
+                showSuccessMessage("👍 Github Register Successfull!");
+                navigate(from, { replace: true });
+            })
+            .catch((err) => {
+                setError(err.message);
+                showErrorMessage(err.message);
+            });
+    };
+
+    const handleFacebookLogin = () => {
+        continueWithFacebook()
+            .then(() => {
+                setError("");
+                showSuccessMessage("👍 Facebook Register Successfull!");
+                navigate(from, { replace: true });
+            })
+            .catch((err) => {
+                setError(err.message);
+                showErrorMessage(err.message);
+            });
+    };
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
@@ -138,18 +189,21 @@ const Register = () => {
                     <div className="p-5">
                         <div className="grid grid-cols-3 gap-1">
                             <button
+                                onClick={handleFacebookLogin}
                                 type="button"
                                 className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
                             >
                                 Facebook
                             </button>
                             <button
+                                onClick={handleGoogleLogin}
                                 type="button"
                                 className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
                             >
                                 Google
                             </button>
                             <button
+                                onClick={handleGithubLogin}
                                 type="button"
                                 className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
                             >

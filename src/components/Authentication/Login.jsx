@@ -9,6 +9,8 @@ const Login = () => {
     const navigate = useNavigate();
     const {
         continueWithGoogle,
+        continueWithGithub,
+        continueWithFacebook,
         emailPasswordUserLogin,
         error,
         setError,
@@ -16,7 +18,6 @@ const Login = () => {
     } = useContext(AuthContext);
 
     const from = location.state?.from?.pathname || "/";
-    console.log(location);
 
     const handleUserLogin = (e) => {
         e.preventDefault();
@@ -48,7 +49,32 @@ const Login = () => {
                 navigate(from, { replace: true });
             })
             .catch((err) => {
-                console.log(err.message);
+                setError(err.message);
+                showErrorMessage(err.message);
+            });
+    };
+
+    const handleGithubLogin = () => {
+        continueWithGithub()
+            .then(() => {
+                setError("");
+                showSuccessMessage("👍 Github SignIn Successfull!");
+                navigate(from, { replace: true });
+            })
+            .catch((err) => {
+                setError(err.message);
+                showErrorMessage(err.message);
+            });
+    };
+
+    const handleFacebookLogin = () => {
+        continueWithFacebook()
+            .then(() => {
+                setError("");
+                showSuccessMessage("👍 Facebook SignIn Successfull!");
+                navigate(from, { replace: true });
+            })
+            .catch((err) => {
                 setError(err.message);
                 showErrorMessage(err.message);
             });
@@ -134,6 +160,7 @@ const Login = () => {
                     <div className="p-5">
                         <div className="grid grid-cols-3 gap-1">
                             <button
+                                onClick={handleFacebookLogin}
                                 type="button"
                                 className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
                             >
@@ -147,6 +174,7 @@ const Login = () => {
                                 Google
                             </button>
                             <button
+                                onClick={handleGithubLogin}
                                 type="button"
                                 className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
                             >
