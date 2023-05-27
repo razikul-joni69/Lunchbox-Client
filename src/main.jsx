@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import Login from "./components/Authentication/Login.jsx";
 import Register from "./components/Authentication/Register.jsx";
+import Blogs from "./components/Blogs/Blogs.jsx";
 import ChefDetails from "./components/ChefDetails/ChefDetails.jsx";
 import Home from "./components/Home/Home.jsx";
 import Layout from "./components/Layout/Layout.jsx";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
                         <ChefDetails />
                     </PrivateRoute>
                 ),
+            },
+            {
+                path: "blog",
+                element: <Blogs />,
             },
             {
                 path: "login",

@@ -1,32 +1,62 @@
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { showErrorMessage } from "../../utils/Notification";
+import { showErrorMessage, showSuccessMessage } from "../../utils/Notification";
 import { AuthContext } from "../providers/AuthProvider";
+import Loading from "../shared/Loading";
 
 const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { continueWithGoogle, emailPasswordUserLogin, error, setError } =
-        useContext(AuthContext);
+    const {
+        continueWithGoogle,
+        emailPasswordUserLogin,
+        error,
+        setError,
+        loading,
+    } = useContext(AuthContext);
 
     const from = location.state?.from?.pathname || "/";
+    console.log(location);
 
     const handleUserLogin = (e) => {
         e.preventDefault();
+
         const email = e.target.email.value;
         const password = e.target.password.value;
         if (password.length < 6) {
             showErrorMessage("Password must be at least 6 characters");
             return setError("Password must be at least 6 characters");
         } else {
-            emailPasswordUserLogin(email, password);
+            emailPasswordUserLogin(email, password)
+                .then(() => {
+                    setError("");
+                    showSuccessMessage("👍 Email SignIn Successfull!");
+                    navigate(from, { replace: true });
+                })
+                .catch((err) => {
+                    setError(err.message);
+                    showErrorMessage(err.message);
+                });
         }
     };
 
     const handleGoogleLogin = () => {
-        continueWithGoogle();
-        navigate(from);
+        continueWithGoogle()
+            .then(() => {
+                setError("");
+                showSuccessMessage("👍 Google SignIn Successfull!");
+                navigate(from, { replace: true });
+            })
+            .catch((err) => {
+                console.log(err.message);
+                setError(err.message);
+                showErrorMessage(err.message);
+            });
     };
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">

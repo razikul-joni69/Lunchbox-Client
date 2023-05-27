@@ -7,6 +7,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
+    updateProfile,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
@@ -33,9 +34,9 @@ const AuthProvider = ({ children }) => {
         // return unsubscribe();
     }, [user]);
 
-    const emailPasswordUserCreate = (email, password) => {
+    const emailPasswordUserCreate = async (email, password, name, photoURL) => {
         setError("");
-        createUserWithEmailAndPassword(auth, email, password)
+        await createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
                 setError("");
                 showSuccessMessage("🦸 User Created Successfully!");
@@ -44,32 +45,24 @@ const AuthProvider = ({ children }) => {
                 setError(err.message);
                 showErrorMessage(err.message);
             });
+
+        await updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photoURL,
+        })
+            .then(() => {})
+            .catch((err) => {
+                setError(`📈 ${err.message}`);
+            });
     };
 
     const emailPasswordUserLogin = (email, password) => {
         setError("");
-        signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                setError("");
-                showSuccessMessage("👍 Email SignIn Successfull!");
-            })
-            .catch((err) => {
-                setError(err.message);
-                showErrorMessage(err.message);
-            });
+        return signInWithEmailAndPassword(auth, email, password);
     };
 
     const continueWithGoogle = () => {
-        signInWithPopup(auth, googleProvider)
-            .then(() => {
-                setError("");
-                showSuccessMessage("👍 Google SignIn Successfull!");
-            })
-            .catch((err) => {
-                console.log(err.message);
-                setError(err.message);
-                showErrorMessage(err.message);
-            });
+        return signInWithPopup(auth, googleProvider);
     };
 
     const logOut = () => {

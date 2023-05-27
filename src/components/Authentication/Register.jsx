@@ -1,16 +1,22 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { showErrorMessage } from "../../utils/Notification";
+import { AuthContext } from "../providers/AuthProvider";
 const Register = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const { emailPasswordUserCreate, error, setError } =
         useContext(AuthContext);
+    const from = location.state?.from?.pathname || "/";
 
     const handleRegister = (e) => {
         e.preventDefault();
+
+        const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirm.value;
+        const photoURL = e.target.photoURL.value;
 
         if (password !== confirmPassword) {
             showErrorMessage("Password doesn't match confirm password!");
@@ -19,7 +25,8 @@ const Register = () => {
             showErrorMessage("Password must be at least 6 characters");
             return setError("Password must be at least 6 characters");
         } else {
-            emailPasswordUserCreate(email, password);
+            emailPasswordUserCreate(email, password, name, photoURL);
+            navigate(from);
             e.target.reset();
         }
     };
@@ -32,6 +39,16 @@ const Register = () => {
                 </h1>
                 <div className="bg-white shadow w-full rounded-lg divide-gray-200">
                     <form onSubmit={handleRegister} className="px-5 pt-7">
+                        <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Please Enter Your Full-Name"
+                            className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                            required
+                        />
                         <label className="font-semibold text-sm text-gray-600 pb-1 block">
                             E-mail
                         </label>
@@ -62,6 +79,17 @@ const Register = () => {
                             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                             required
                         />
+                        <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                            Photo URL
+                        </label>
+                        <input
+                            type="text"
+                            name="photoURL"
+                            placeholder="Please Enter a Valid PhotoURL"
+                            className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                            required
+                        />
+
                         {error && (
                             <p className=" mb-5 text-sm  text-red-700">
                                 {error}

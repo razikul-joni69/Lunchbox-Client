@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Loading from "./Loading";
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
     };
 
     if (loading) {
-        return <Loading/>;
+        return <Loading />;
     }
 
     return (
@@ -44,49 +44,40 @@ const Header = () => {
                             className="menu menu-compact z-50 dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                         >
                             <li>
-                                <Link to="/">Home</Link>
+                                <NavLink to="/">Home</NavLink>
                             </li>
                             <li>
-                                <Link to="/blog">Blog</Link>
-                            </li>
-                            <li>
-                                <a>About Us</a>
+                                <NavLink to="/blog">Blog</NavLink>
                             </li>
                         </ul>
                     </div>
-                    <Link to="/" className="btn btn-ghost normal-case text-xl">
+                    <NavLink
+                        to="/"
+                        className="btn btn-ghost normal-case text-xl"
+                    >
                         LunchBox
-                    </Link>
+                    </NavLink>
                 </div>
                 <div className="navbar-start hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li>
-                            <Link to="/">Home</Link>
+                            <NavLink to="/">Home</NavLink>
                         </li>
                         <li>
-                            <Link to="/blog">Blog</Link>
-                        </li>
-                        <li>
-                            <a>About Us</a>
+                            <NavLink to="/blog">Blog</NavLink>
                         </li>
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <div className="flex-none gap-2">
-                        <div className="form-control">
-                            <input
-                                type="text"
-                                placeholder="Search"
-                                className="input input-bordered"
-                            />
-                        </div>
+                    <div className="mr-2">
+                        <span className="ml-[5px]"> Mode</span> <br />
+                        <input
+                            onChange={handleDarkMode}
+                            type="checkbox"
+                            className="toggle toggle-info"
+                            checked={darkMode}
+                        />
                     </div>
-                    <input
-                        onChange={handleDarkMode}
-                        type="checkbox"
-                        className="toggle toggle-info"
-                        checked={darkMode}
-                    />
 
                     {user ? (
                         <div className={`dropdown  dropdown-end`}>
@@ -140,15 +131,18 @@ const Header = () => {
                         </div>
                     ) : (
                         <>
-                            <Link
-                                to="/register"
-                                className="btn btn-outline mx-2"
-                            >
-                                Register
-                            </Link>
-                            <Link to="/login" className="btn btn-outline">
-                                Login
-                            </Link>
+                            <div className="flex">
+                                <ul className="menu menu-horizontal px-1">
+                                    <li>
+                                        <NavLink to="/login">LogIn</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/register">
+                                            Register
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </div>
                         </>
                     )}
                 </div>
