@@ -10,6 +10,7 @@ import Blogs from "./components/Blogs/Blogs.jsx";
 import ChefDetails from "./components/ChefDetails/ChefDetails.jsx";
 import Home from "./components/Home/Home.jsx";
 import Layout from "./components/Layout/Layout.jsx";
+import NotFound from "./components/NotFound/NotFound.jsx";
 import AuthProvider from "./components/providers/AuthProvider.jsx";
 import PrivateRoute from "./components/routes/PrivateRoute.jsx";
 import "./index.css";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
                 element: <Register />,
             },
         ],
+    },
+    {
+        path: "*",
+        element: <NotFound />,
     },
 ]);
 

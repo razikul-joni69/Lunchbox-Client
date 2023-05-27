@@ -114,7 +114,7 @@ const Header = () => {
                             >
                                 <li>
                                     {user?.displayName ? (
-                                        <a>{user?.displayName}</a>
+                                        <a>Name: {user?.displayName}</a>
                                     ) : (
                                         <a>Name: Unknown</a>
                                     )}
